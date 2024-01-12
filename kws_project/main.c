@@ -196,24 +196,6 @@ uint16_t thresholdLow = THRESHOLD_LOW;
 volatile uint8_t i2s_flag = 0;
 int32_t i2s_rx_buffer[I2S_RX_BUFFER_SIZE];
 
-// Define LED on/off states
-typedef enum _LED_state_t {
-    OFF,
-    ON
-} LED_state_t;
-
-// Define LED color states
-typedef enum _LED_color_t {
-    RED_STATE,
-    GREEN_STATE,
-    BLUE_STATE
-} LED_color_t;
-
-// current LED state
-LED_state_t LED_state = OFF;
-LED_color_t LED_color_current = RED_STATE;
-LED_color_t LED_color_next = RED_STATE;
-
 /* **** Constants **** */
 typedef enum _mic_processing_state {
     STOP = 0, /* No processing  */
@@ -347,12 +329,14 @@ void lightShow(const char* keyword) {
     if (!strcmp(keyword, "GO")) {
         // enable light show
         lightShowEnabled = true;
+        printf("enabled light show");
         return;
     } else if (!strcmp(keyword, "STOP")) {
         for (int i = 0; i <= 2; i++) {
                     LED_Off(i);
         }
         lightShowEnabled = false;
+        printf("disabled light show");
         return;
     }
 
@@ -361,20 +345,28 @@ void lightShow(const char* keyword) {
     if (!strcmp(keyword, "ON")) {
         // turn on last selected colour
         LED_On(selectedColour);
+        printf("turned on LED %i", selectedColour);
+        return;
     } else if (!strcmp(keyword, "OFF")) {
         // turn off last selected colour
         LED_Off(selectedColour);
+        printf("turned off LED %i", selectedColour);
+        return;
     } else {
         // change last selected colour
         if (!strcmp(keyword, "RED")) {
             selectedColour = red;
+            printf("selected red LED");
         } else if (!strcmp(keyword, "GREEN")) {
             selectedColour = green;
+            printf("selected green LED");
         } else if (!strcmp(keyword, "BLUE")) {
             selectedColour = blue;
+            printf("selected blue LED");
         } else {
-            PR_DEBUG("SOMETHING WENT WRONG!!");
+            printf("SOMETHING WENT WRONG!!");
         }
+        return;
     }
 }
 
@@ -834,9 +826,9 @@ int main(void)
                 PR_DEBUG("----------------------------------------- \n");
                 /* Treat low confidence detections as unknown*/
                 if (!ret || out_class == NUM_OUTPUTS - 1) {
-                    PR_DEBUG("Detected word: %s", "Unknown");
+                    PR_DEBUG("Detected word: %s\n", "Unknown");
                 } else {
-                    PR_DEBUG("Detected word: %s (%0.1f%%)", keywords[out_class], probability);
+                    PR_DEBUG("Detected word: %s (%0.1f%%)\n", keywords[out_class], probability);
                     char* keyword = keywords[out_class];
                     lightShow(keyword);
                 }
@@ -960,7 +952,7 @@ int main(void)
     }
 
     /* Turn off LED2 (Red) */
-    LED_Off(LED2);
+    //LED_Off(LED2);
     PR_DEBUG("Total Samples:%d, Total Words: %d \n", sampleCounter, wordCounter);
 
 #ifdef ENABLE_TFT
