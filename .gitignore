@@ -15,3 +15,5 @@
 /.version-check
 /venv*/
 /sdk/
+/synthed-net/
+/kws_project/venv/
