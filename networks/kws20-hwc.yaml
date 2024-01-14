@@ -29,7 +29,7 @@ layers:
   - pad: 0
     activate: ReLU
     out_offset: 0x0000
-    processors: 0x0003ffffffffffff
+    processors: 0x0000ffffffffffff
     operation: Conv1d
     kernel_size: 1
   # Conv 2D - 5 layers
@@ -56,12 +56,12 @@ layers:
     operation: Conv2d
   - pad: 1
     activate: ReLU
-    out_offset: 0x0000
-    processors: 0xfffffffc00000000
+    out_offset: 0x2000
+    processors: 0xffffffff00000000
     operation: Conv2d
   - flatten: true
-    out_offset: 0x2000
-    processors: 0x000000000000007f
+    out_offset: 0x0000
+    processors: 0x00000000000000ff
     operation: MLP
     output_width: 32
     activate: None
