@@ -6,7 +6,7 @@
 **************************************************************************************************/
 
 /*
- * This header file was automatically @generated for the kws_colours_5 network from a template.
+ * This header file was automatically @generated for the kws_colours_final network from a template.
  * Please do not edit; instead, edit the template and regenerate.
  */
 
@@ -23,35 +23,35 @@ typedef int16_t q15_t;
 
 /*
   SUMMARY OF OPS
-  Hardware: 13,846,912 ops (13,787,648 macc; 59,264 comp; 0 add; 0 mul; 0 bitwise)
+  Hardware: 14,020,608 ops (13,961,216 macc; 59,392 comp; 0 add; 0 mul; 0 bitwise)
     Layer 0: 1,651,200 ops (1,638,400 macc; 12,800 comp; 0 add; 0 mul; 0 bitwise)
     Layer 1: 1,292,800 ops (1,280,000 macc; 12,800 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 2: 646,400 ops (640,000 macc; 6,400 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 3: 104,448 ops (102,400 macc; 2,048 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 2: 620,544 ops (614,400 macc; 6,144 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 3: 100,352 ops (98,304 macc; 2,048 comp; 0 add; 0 mul; 0 bitwise)
     Layer 4: 593,920 ops (589,824 macc; 4,096 comp; 0 add; 0 mul; 0 bitwise)
     Layer 5: 2,367,488 ops (2,359,296 macc; 8,192 comp; 0 add; 0 mul; 0 bitwise)
     Layer 6: 4,726,784 ops (4,718,592 macc; 8,192 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 7: 2,215,680 ops (2,211,840 macc; 3,840 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 8: 242,816 ops (241,920 macc; 896 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 9: 5,376 ops (5,376 macc; 0 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 7: 2,363,392 ops (2,359,296 macc; 4,096 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 8: 295,936 ops (294,912 macc; 1,024 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 9: 8,192 ops (8,192 macc; 0 comp; 0 add; 0 mul; 0 bitwise)
 
   RESOURCE USAGE
-  Weight memory: 113,050 bytes out of 442,368 bytes total (25.6%)
+  Weight memory: 117,200 bytes out of 442,368 bytes total (26.5%)
   Bias memory:   0 bytes out of 2,048 bytes total (0.0%)
 */
 
 /* Number of outputs for this network */
-#define CNN_NUM_OUTPUTS 6
+#define CNN_NUM_OUTPUTS 8
 
 /* Use this timer to time the inference */
 #define CNN_INFERENCE_TIMER MXC_TMR0
 
 /* Port pin actions used to signal that processing is active */
-
-#define CNN_START LED_On(1)
-#define CNN_COMPLETE LED_Off(1)
-#define SYS_START LED_On(0)
-#define SYS_COMPLETE LED_Off(0)
+/* Disabled for the demo */
+#define CNN_START //LED_On(1)
+#define CNN_COMPLETE //LED_Off(1)
+#define SYS_START //LED_On(0)
+#define SYS_COMPLETE //LED_Off(0)
 
 /* Run software SoftMax on unloaded data */
 void softmax_q17p14_q15(const q31_t * vec_in, const uint16_t dim_vec, q15_t * p_out);

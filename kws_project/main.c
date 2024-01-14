@@ -31,6 +31,21 @@
  *
  ******************************************************************************/
 
+/***
+ *     __        __            __          __             ______   __                                      _______                                    
+ *    /  |      /  |          /  |        /  |           /      \ /  |                                    /       \                                   
+ *    $$ |      $$/   ______  $$ |____   _$$ |_         /$$$$$$  |$$ |____    ______   __   __   __       $$$$$$$  |  ______   _____  ____    ______  
+ *    $$ |      /  | /      \ $$      \ / $$   |        $$ \__$$/ $$      \  /      \ /  | /  | /  |      $$ |  $$ | /      \ /     \/    \  /      \ 
+ *    $$ |      $$ |/$$$$$$  |$$$$$$$  |$$$$$$/         $$      \ $$$$$$$  |/$$$$$$  |$$ | $$ | $$ |      $$ |  $$ |/$$$$$$  |$$$$$$ $$$$  |/$$$$$$  |
+ *    $$ |      $$ |$$ |  $$ |$$ |  $$ |  $$ | __        $$$$$$  |$$ |  $$ |$$ |  $$ |$$ | $$ | $$ |      $$ |  $$ |$$    $$ |$$ | $$ | $$ |$$ |  $$ |
+ *    $$ |_____ $$ |$$ \__$$ |$$ |  $$ |  $$ |/  |      /  \__$$ |$$ |  $$ |$$ \__$$ |$$ \_$$ \_$$ |      $$ |__$$ |$$$$$$$$/ $$ | $$ | $$ |$$ \__$$ |
+ *    $$       |$$ |$$    $$ |$$ |  $$ |  $$  $$/       $$    $$/ $$ |  $$ |$$    $$/ $$   $$   $$/       $$    $$/ $$       |$$ | $$ | $$ |$$    $$/ 
+ *    $$$$$$$$/ $$/  $$$$$$$ |$$/   $$/    $$$$/         $$$$$$/  $$/   $$/  $$$$$$/   $$$$$/$$$$/        $$$$$$$/   $$$$$$$/ $$/  $$/  $$/  $$$$$$/  
+ *                  /  \__$$ |                                                                                                                        
+ *                  $$    $$/                                                                                                                         
+ *                   $$$$$$/                                                                                                                          
+ */
+
 /**
  * @file    main.c
  * @brief   Main for KWS20
@@ -136,7 +151,7 @@
 #define SILENCE_COUNTER_THRESHOLD \
     20 // [>20] number of back to back CHUNK periods with avg < THRESHOLD_LOW to declare the end of a word
 #define PREAMBLE_SIZE 30 * CHUNK // how many samples before beginning of a keyword to include
-#define INFERENCE_THRESHOLD 70 // min probability (0-100) to accept an inference, default: 90
+#define INFERENCE_THRESHOLD 60 // min probability (0-100) to accept an inference, default: 90
 #else
 #define SAMPLE_SCALE_FACTOR \
     1 // multiplies 16-bit samples by this scale factor before converting to 8-bit
@@ -329,14 +344,14 @@ void lightShow(const char* keyword) {
     if (!strcmp(keyword, "GO")) {
         // enable light show
         lightShowEnabled = true;
-        printf("enabled light show");
+        printf("Enabled Light Show Demo");
         return;
     } else if (!strcmp(keyword, "STOP")) {
         for (int i = 0; i <= 2; i++) {
                     LED_Off(i);
         }
         lightShowEnabled = false;
-        printf("disabled light show");
+        printf("Disabled Light Show Demo");
         return;
     }
 
@@ -345,24 +360,24 @@ void lightShow(const char* keyword) {
     if (!strcmp(keyword, "ON")) {
         // turn on last selected colour
         LED_On(selectedColour);
-        printf("turned on LED %i", selectedColour);
+        printf("Turned on LED %i", selectedColour);
         return;
     } else if (!strcmp(keyword, "OFF")) {
         // turn off last selected colour
         LED_Off(selectedColour);
-        printf("turned off LED %i", selectedColour);
+        printf("Turned off LED %i", selectedColour);
         return;
     } else {
         // change last selected colour
         if (!strcmp(keyword, "RED")) {
             selectedColour = red;
-            printf("selected red LED");
+            printf("Selected red LED");
         } else if (!strcmp(keyword, "GREEN")) {
             selectedColour = green;
-            printf("selected green LED");
+            printf("Selected green LED");
         } else if (!strcmp(keyword, "BLUE")) {
             selectedColour = blue;
-            printf("selected blue LED");
+            printf("Selected blue LED");
         } else {
             printf("SOMETHING WENT WRONG!!");
         }
@@ -829,7 +844,7 @@ int main(void)
                     PR_DEBUG("Detected word: %s\n", "Unknown");
                 } else {
                     PR_DEBUG("Detected word: %s (%0.1f%%)\n", keywords[out_class], probability);
-                    char* keyword = keywords[out_class];
+                    const char* keyword = keywords[out_class];
                     lightShow(keyword);
                 }
                 PR_DEBUG("\n----------------------------------------- \n");

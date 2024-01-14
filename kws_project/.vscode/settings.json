@@ -82,7 +82,8 @@
     "files.associations": {
         "bitmap.h": "c",
         "cnn.h": "c",
-        "tft_ssd2119.h": "c"
+        "tft_ssd2119.h": "c",
+        "random": "c"
     }
 }
 
