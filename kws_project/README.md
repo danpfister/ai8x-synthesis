@@ -8,6 +8,8 @@ The model checkpoints and descriptions can be found in the [ai8x-training reposi
 
 The demo features a simple state machine using the keywords {`GO`, `STOP`, `RED`, `GREEN`, `BLUE`, `ON`, `OFF`}.
 
+The keywords `RED`, `GREEN` and `BLUE` were added manually, the others stem from [Google's Speech Commands dataset](https://www.tensorflow.org/datasets/catalog/speech_commands)
+
 `GO` and `STOP` enable and disable the state machine, respectively. `RED`, `GREEN` and `BLUE` change which LED in the RGB LED D1 is currently selected. `ON` and `OFF` turns the selected LED on and off, respectively.
 
 ### Note
